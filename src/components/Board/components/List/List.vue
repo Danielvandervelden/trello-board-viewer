@@ -6,7 +6,8 @@
 			<Card
 				v-for="card in cards"
 				:key="card.id"
-				:data="card" />
+				:data="card"
+				@initializeFades="determineContainerClasses('.card-wrapper')" />
 		</div>
 	</section>
 </template>
@@ -32,13 +33,33 @@ export default {
 	async mounted() {
 		this.cards = await fetch(`${this.API_URL}/lists/${this.data.id}/cards`).then(res => res.json());
 
-		/** Set the scroll listener for the white fade-outs on top and bottom of the list. */
+		/** Set the scroll listener for the white fade-outs on top and bottom of the list. And execute the function once to set initial status. */
 		this.initializeScrollHandler();
 	},
 
 	methods: {
 		initializeScrollHandler() {
+			this.$el.querySelector('.card-wrapper').addEventListener('scroll', this.determineContainerClasses.bind(this, '.card-wrapper'));
+		},
 
+		/**
+		 * 
+		 * @param { String } className The classname of the element you want to add fade clasess to. Needs to be in this vue component.
+		 */
+		determineContainerClasses(className) {
+			const el = this.$el.querySelector(className);
+			console.log(el);
+			if(el.scrollTop > 10) {
+				this.$el.classList.add('fade-top');
+			} else {
+				this.$el.classList.remove('fade-top')
+			}
+
+			if(Number(el.scrollTop + el.offsetHeight) <= el.scrollHeight - 20) {
+				this.$el.classList.add('fade-bottom');
+			} else {
+				this.$el.classList.remove('fade-bottom');
+			}
 		}
 	}
 }
@@ -58,35 +79,46 @@ export default {
 		position: relative;
 		overflow: hidden;
 
+		&:before,
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			z-index: 2;
+			left: 0;
+			width: 100%;
+			height: 300px;
+			opacity: 0;
+			pointer-events: none;
+			transition: all .2s ease-in-out;
+		}
+
+		&:before {
+			top: 35px;
+			background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		}
+
+		&:after {
+			bottom: 0;
+			background: linear-gradient(to top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		}
+
 		&.fade-top {
 			&:before {
-				content: '';
-				display: block;
-				position: absolute;
-				top: 35px;
-				left: 0;
-				width: 100%;
-				height: 300px;
-				background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				opacity: 1;
 			}
 		}
 
 		&.fade-bottom {
 			&:after {
-				content: '';
-				display: block;
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				width: 100%;
-				height: 300px;
-				background: linear-gradient(to top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				opacity: 1;
 			}
 		}
 
 		.card-wrapper {
-			max-height: inherit;
+			max-height: calc(100vh - 250px);
 			overflow: auto;
+			margin-top: 16px;
 		}
 
 		+ .list {

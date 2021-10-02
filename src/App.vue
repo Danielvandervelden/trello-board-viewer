@@ -1,13 +1,17 @@
 <template>
 	<div v-if="!board" class="intro__noboard">
-		<h1>Welcome to Trello Board Viewer.</h1>
-		<span>Select a board down below, or enter a specific board ID you'd like to view!</span>
-		<BoardSelector @boardSelect="changeBoard" />
+		<div class="intro__noboard--wrapper">
+			<h1>Welcome to Trello Board Viewer.</h1>
+			<span>Select a board down below, or enter a specific board ID you'd like to view!</span>
+			<BoardSelector @boardSelect="changeBoard" />
+		</div>
 	</div>
 
 	<div v-else class="intro__board">
-		<button @click="resetBoard" type="button">&lt; Change board</button>
-		<h1>Here's your board: {{board.name}}</h1>
+		<div class="intro__board--heading">
+			<button @click="resetBoard" type="button"><unicon name="arrow-left" /> Change board</button>
+			<h1>Here's your board: {{board.name}}</h1>
+		</div>
 		<Board :data="board" />
 	</div>
 
@@ -54,4 +58,31 @@ export default {
 
 <style lang="scss">
 	@import '@/assets/scss/_base.scss';
+
+	.intro__noboard {
+		width: 100vw;
+		height: 100vh;
+		margin-top: 20vw;
+		display: flex;
+		justify-content: center;
+	}
+
+	.intro__board {
+		&--heading {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			padding: 10px 20px;
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			left: 0;
+			background-color: rgba(255, 255, 255, .75);
+			width: 100%;
+		}
+
+		h1 {
+			margin-left: 1rem;
+		}
+	}
 </style>

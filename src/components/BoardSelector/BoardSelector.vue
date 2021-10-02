@@ -1,10 +1,12 @@
 <template>
 	<div
 		class='board-selector'>
-		<div class="input-wrapper __radio">
+		<div class="input-wrapper __checkbox">
 			<strong for="custom_id">Would you like to enter a custom ID?</strong>
-			<label><input type="radio" name="custom_id" value="true" @click="customIDHandler(true)">Yes</label>
-			<label><input checked type="radio" name="custom_id" value="false" @click="customIDHandler(false)">No</label>
+			<label class="switch">
+				<input type="checkbox">
+				<span class="slider round"></span>
+			</label>
 		</div>
 
 		<div v-show="!enableCustomId" class="input-wrapper __select">
@@ -62,6 +64,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+	.board-selector {
+		margin-top: 1rem;
+	}
 </style>
