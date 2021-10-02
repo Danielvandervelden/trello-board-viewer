@@ -2,9 +2,9 @@
 	<div
 		class='board-selector'>
 		<div class="input-wrapper __radio">
-			<label for="custom_id">Would you like to enter a custom ID?</label>
-			<span><input type="radio" name="custom_id" value="true" @click="customIDHandler(true)">Yes</span>
-			<span><input checked type="radio" name="custom_id" value="false" @click="customIDHandler(false)">No</span>
+			<strong for="custom_id">Would you like to enter a custom ID?</strong>
+			<label><input type="radio" name="custom_id" value="true" @click="customIDHandler(true)">Yes</label>
+			<label><input checked type="radio" name="custom_id" value="false" @click="customIDHandler(false)">No</label>
 		</div>
 
 		<div v-show="!enableCustomId" class="input-wrapper __select">
