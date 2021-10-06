@@ -1,8 +1,5 @@
 <template>
-	<a	
-		:href="data.url"
-		target="_blank"
-		rel="noopener noreferrer"
+	<article	
 		class='card'
 		:class="this.cover ? 'has-cover' : ''">
 		<div class="card__inner">
@@ -19,9 +16,10 @@
 				<span class="card__attachments"><unicon name="paperclip" /><span class="card__attachments--count">{{data.badges.attachments}}</span></span>
 				<span v-if="data.badges.checkItems" class="card__checklist"><unicon name="check-square" /><span class="card__checklist--count">{{data.badges.checkItemsChecked}}/{{data.badges.checkItems}}</span></span>
 				<span v-if="data.badges.due" class="card__due"><unicon name="schedule" /><span class="card__due--date">{{parseDate(data.badges.due)}}</span></span>
+				<span class="card__link"><a :href="data.url" :title="`Go to ${data.name} on Trello`" target="_blank" rel="noopener noreferrer">Go to card</a></span>
 			</div>
 		</div>
-	</a>
+	</article>
 </template>
 
 <script>
@@ -61,6 +59,12 @@ export default {
 				month: 'short',
 				year: 'numeric'
 			});
+		},
+
+		handleMobile(e) {
+			if(window.innerWidth < 1025) {
+				e.preventDefault();
+			}
 		}
 	}
 }
@@ -118,6 +122,10 @@ export default {
 					margin-right: 5px;
 				}
 			}
+		}
+
+		&__link {
+			margin-top: 1rem;
 		}
 
 		&:not(.has-cover) {

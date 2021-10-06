@@ -14,6 +14,7 @@
 
 <script>
 import Card from '../Card/Card.vue';
+import { throttle } from '@/helper/helper';
 
 export default {
 	props: {
@@ -39,7 +40,7 @@ export default {
 
 	methods: {
 		initializeScrollHandler() {
-			this.$el.querySelector('.card-wrapper').addEventListener('scroll', this.determineContainerClasses.bind(this, '.card-wrapper'));
+			this.$el.querySelector('.card-wrapper').addEventListener('scroll', throttle(this.determineContainerClasses.bind(this, '.card-wrapper'), 50));
 		},
 
 		/**
@@ -48,7 +49,6 @@ export default {
 		 */
 		determineContainerClasses(className) {
 			const el = this.$el.querySelector(className);
-			console.log(el);
 			if(el.scrollTop > 10) {
 				this.$el.classList.add('fade-top');
 			} else {
@@ -69,13 +69,13 @@ export default {
 	.list {
 		display: inline-block;
 		vertical-align: top;
-		width: 300px;
+		width: 250px;
 		flex-shrink: 0;
 		padding: 16px;
 		background-color: #FFF;
 		box-shadow: 2px 2px 6px rgba(0, 0, 0, .5);
 		border-radius: 8px;
-		max-height: calc(100vh - 200px);
+		max-height: calc(100vh - 90px);
 		position: relative;
 		overflow: hidden;
 
@@ -87,14 +87,14 @@ export default {
 			z-index: 2;
 			left: 0;
 			width: 100%;
-			height: 300px;
+			height: 75px;
 			opacity: 0;
 			pointer-events: none;
 			transition: all .2s ease-in-out;
 		}
 
 		&:before {
-			top: 35px;
+			top: 45px;
 			background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 		}
 
@@ -116,13 +116,19 @@ export default {
 		}
 
 		.card-wrapper {
-			max-height: calc(100vh - 250px);
+			max-height: calc(100vh - 190px);
 			overflow: auto;
 			margin-top: 16px;
 		}
 
 		+ .list {
 			margin-left: 1rem;
+		}
+	}
+
+	@media screen and (min-width: $break_tablet) {
+		.list {
+			width: 300px;
 		}
 	}
 </style>

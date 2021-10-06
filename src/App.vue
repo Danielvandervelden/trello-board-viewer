@@ -10,7 +10,7 @@
 	<div v-else class="intro__board">
 		<div class="intro__board--heading">
 			<button @click="resetBoard" type="button"><unicon name="arrow-left" /> Change board</button>
-			<h1>Here's your board: {{board.name}}</h1>
+			<strong>{{board.name}}</strong>
 		</div>
 		<Board :data="board" />
 	</div>
@@ -59,30 +59,44 @@ export default {
 <style lang="scss">
 	@import '@/assets/scss/_base.scss';
 
-	.intro__noboard {
-		width: 100vw;
-		height: 100vh;
-		margin-top: 20vw;
-		display: flex;
-		justify-content: center;
-	}
+	.intro {
 
-	.intro__board {
-		&--heading {
+		&__noboard {
+			width: 100vw;
+			height: 100vh;
+			margin-top: 20vw;
 			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			padding: 10px 20px;
-			position: absolute;
-			z-index: 2;
-			top: 0;
-			left: 0;
-			background-color: rgba(255, 255, 255, .75);
-			width: 100%;
+			justify-content: center;
+			padding: 0 10px;
 		}
 
-		h1 {
-			margin-left: 1rem;
+		&__board {
+			&--heading {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				padding: 10px 10px;
+				position: absolute;
+				z-index: 2;
+				top: 0;
+				left: 0;
+				background-color: rgba(255, 255, 255, .75);
+				width: 100%;
+
+				button {
+					padding: 5px 7px;
+				}
+
+				strong {
+					margin-left: 1rem;
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $break_tablet) {
+		.intro__noboard {
+
 		}
 	}
 </style>

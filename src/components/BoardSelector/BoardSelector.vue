@@ -4,7 +4,7 @@
 		<div class="input-wrapper __checkbox">
 			<strong for="custom_id">Would you like to enter a custom ID?</strong>
 			<label class="switch">
-				<input type="checkbox">
+				<input type="checkbox" v-model="enableCustomId">
 				<span class="slider round"></span>
 			</label>
 		</div>
@@ -23,6 +23,7 @@
 		<div v-show="enableCustomId" class="input-wrapper __input">
 			<label for="board-id">Enter custom board ID (it must be publicly available)</label>
 			<input minlength="8" maxlength="8" type="text" name="board-id" id="board-id" @input="boardId = $event.target.value">
+			<span>(Grab the red part from any trello board URL: https://trello.com/b/[<strong>6kEJFwks</strong>]/keeping-up-with-friends)</span>
 		</div>
 		<button :disabled="isDisabled" type="button" @click="emitBoardSelect">Go!</button>
 	</div>
@@ -67,5 +68,45 @@ export default {
 <style lang="scss" scoped>
 	.board-selector {
 		margin-top: 1rem;
+	}
+
+	.input-wrapper {
+		&.__checkbox {
+			display: flex;
+			align-items: center;
+
+			strong {
+				margin-right: 16px;
+				display: block;
+			}
+		}
+
+		&.__select,
+		&.__input {
+			text-align: center;
+
+			label {
+				display: block;
+				margin-bottom: 16px;
+			}
+		}
+
+		&.__input {
+			span {
+				display: block;
+				margin-top: 10px;
+				font-size: 12px;
+				
+				strong {
+					color: $red;
+				}
+			}
+		}
+	}
+
+	button {
+		margin-top: 16px;
+		display: block;
+		width: 100%;
 	}
 </style>

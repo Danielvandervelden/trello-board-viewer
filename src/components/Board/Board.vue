@@ -55,8 +55,12 @@ export default {
 		display: block;
 		white-space: nowrap;
 		overflow-x: scroll;
-		padding: 200px 24px 24px;
+		padding: 90px 24px 24px;
 		background-repeat: no-repeat;
 		background-size: cover;
+	}
+
+	@media screen and (min-width: $break_tablet) {
+
 	}
 </style>
