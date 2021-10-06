@@ -1,6 +1,9 @@
 # trello board viewer
 Super simple Vue.js app with which you can view Trello boards. Either choose from the existing list, or input your own Trello board ID to fetch it from the API.
 
+
+SAMPLE LIVE WEBSITE: https://nervous-williams-496dcb.netlify.app
+
 ## Project setup
 ```
 npm install
