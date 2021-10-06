@@ -230,6 +230,10 @@ export default {
 					flex-wrap: nowrap;
 				}
 
+				&__link {
+					align-items: flex-end;
+				}
+
 				&__due {
 					flex-basis: auto;
 				}
