@@ -74,6 +74,7 @@ export default {
 	.card {
 		width: 100%;
 		border: 1px solid #ddd;
+		background-color: #FFF;
 		border-radius: 5px;
 		padding: 8px;
 		position: relative;
@@ -135,10 +136,14 @@ export default {
 
 			.card {
 				&__back {
+					flex-wrap: wrap;
 					margin-top: 10px;
 					justify-content: space-between;
 				}
 
+				&__link {
+					flex-basis: 100%;
+				}
 			}
 
 			&:hover {
@@ -181,6 +186,24 @@ export default {
 			&:hover {
 				.card__inner {
 					transform: rotateY(180deg);
+				}
+			}
+		}
+	}
+	
+	@media screen and (min-width: $break_tablet) {
+		.card {
+			&:not(.has-cover) {
+				.card {
+					&__back {
+						flex-wrap: nowrap;
+						justify-content: space-between;
+					}
+
+					&__link {
+						flex-basis: auto;
+						margin-top: 0;
+					}
 				}
 			}
 		}

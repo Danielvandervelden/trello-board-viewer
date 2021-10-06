@@ -72,7 +72,7 @@ export default {
 		width: 250px;
 		flex-shrink: 0;
 		padding: 16px;
-		background-color: #FFF;
+		background-color: #eee;
 		box-shadow: 2px 2px 6px rgba(0, 0, 0, .5);
 		border-radius: 8px;
 		max-height: calc(100vh - 90px);
