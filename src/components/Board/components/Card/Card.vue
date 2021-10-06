@@ -15,8 +15,8 @@
 				<span class="card__comments"><unicon name="comment" /><span class="card__comments--count">{{data.badges.comments}}</span></span>
 				<span class="card__attachments"><unicon name="paperclip" /><span class="card__attachments--count">{{data.badges.attachments}}</span></span>
 				<span v-if="data.badges.checkItems" class="card__checklist"><unicon name="check-square" /><span class="card__checklist--count">{{data.badges.checkItemsChecked}}/{{data.badges.checkItems}}</span></span>
-				<span v-if="data.badges.due" class="card__due"><unicon name="schedule" /><span class="card__due--date">{{parseDate(data.badges.due)}}</span></span>
 				<span class="card__link"><a :href="data.url" :title="`Go to ${data.name} on Trello`" target="_blank" rel="noopener noreferrer">Go to card</a></span>
+				<span v-if="data.badges.due" class="card__due"><unicon fill="#000" name="schedule" /><span class="card__due--date">{{parseDate(data.badges.due)}}</span></span>
 			</div>
 		</div>
 	</article>
@@ -114,10 +114,12 @@ export default {
 
 		&__back {
 			display: flex;
+			flex-wrap: wrap;
 
 			> span {
 				display: flex;
 				align-items: center;
+				line-height: 20px;
 
 				.unicon {
 					margin-right: 5px;
@@ -125,8 +127,37 @@ export default {
 			}
 		}
 
+		&__comments {
+			flex-basis: 20%;
+		}
+
+		&__attachments {
+			flex-basis: 20%;
+		}
+
+		&__checklist {
+			flex-basis: 30%;
+		}
+
 		&__link {
 			margin-top: 1rem;
+			flex-basis: 40%;
+		}
+
+		&__due {
+			flex-basis: 100%;
+			margin-top: 10px;
+			padding: 5px;
+			background-color: lighten($red, 15%);
+			border-radius: 20px;
+			color: #000;
+			justify-content: center;
+
+
+			.unicon {
+				display: inline-flex;
+				align-items: center;
+			}
 		}
 
 		&:not(.has-cover) {
@@ -142,7 +173,23 @@ export default {
 				}
 
 				&__link {
+					margin-top: 0;
+				}
+
+				&__due {
 					flex-basis: 100%;
+					margin-top: 10px;
+					padding: 5px;
+					background-color: lighten($red, 15%);
+					border-radius: 20px;
+					color: #000;
+					justify-content: center;
+
+
+					.unicon {
+						display: inline-flex;
+						align-items: center;
+					}
 				}
 			}
 
@@ -180,6 +227,11 @@ export default {
 					justify-content: center;
 					padding: 20px;
 					flex-direction: column;
+					flex-wrap: nowrap;
+				}
+
+				&__due {
+					flex-basis: auto;
 				}
 			}
 
@@ -196,7 +248,6 @@ export default {
 			&:not(.has-cover) {
 				.card {
 					&__back {
-						flex-wrap: nowrap;
 						justify-content: space-between;
 					}
 
