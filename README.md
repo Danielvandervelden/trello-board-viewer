@@ -1,4 +1,4 @@
-# onewelcome
+# trello board viewer
 
 ## Project setup
 ```
