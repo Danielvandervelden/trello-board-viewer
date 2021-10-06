@@ -129,6 +129,11 @@ export default {
 	@media screen and (min-width: $break_tablet) {
 		.list {
 			width: 300px;
+
+			&:before,
+			&:after {
+				height: 150px;
+			}
 		}
 	}
 </style>
