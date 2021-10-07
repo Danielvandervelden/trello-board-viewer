@@ -15,9 +15,9 @@ body {
 
 button,
 a.button {
-	background-color: lighten(#0198E1, 40%);
-	color: #0198E1;
-	border: 2px solid lighten(#0198E1, 40%);
+	background-color: lighten($red, 10%);
+	color: #FFF;
+	border: 2px solid lighten($red, 10%);
 	border-radius: 10px;
 	padding: 5px 13px;
 	transition: all .2s ease-in-out;
@@ -28,7 +28,7 @@ a.button {
 
 	&:not(:disabled):hover {
 		background-color: transparent;
-		border-color: #0198E1;
+		color: #000;
 	}
 
 	&:disabled {
