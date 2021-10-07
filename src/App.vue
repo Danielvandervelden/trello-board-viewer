@@ -9,7 +9,7 @@
 
 	<div v-else class="intro__board">
 		<div class="intro__board--heading">
-			<button @click="resetBoard" type="button"><unicon name="arrow-left" /> Change board</button>
+			<button @click="resetBoard" type="button"><unicon fill="#FFF" name="arrow-left" /> Change board</button>
 			<strong>{{board.name}}</strong>
 		</div>
 		<Board :data="board" />
